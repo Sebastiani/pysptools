@@ -21,7 +21,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os.path as os
 
 def plot_linear_stretch(M, path, R, G, B, suffix=None):
     """
@@ -49,9 +49,9 @@ def plot_linear_stretch(M, path, R, G, B, suffix=None):
     img = _linear_stretch(M, R, G, B)
     plt.ioff()
     if suffix == None:
-        fout = osp.join(path, 'linear_stretch.png')
+        fout = os.join(path, 'linear_stretch.png')
     else:
-        fout = osp.join(path, 'linear_stretch_{0}.png'.format(suffix))
+        fout = os.join(path, 'linear_stretch_{0}.png'.format(suffix))
     plt.imsave(fout, img)
     plt.close()
 
@@ -105,14 +105,13 @@ def _linear_stretch(data, R, G, B):
     return img1
 
 if __name__ == '__main__':
-    import os.path as osp
     import pysptools.util as util
     data_path = '../data1'
     project_path = '../'
-    result_path = osp.join(project_path, 'results')
+    result_path = os.join(project_path, 'results')
     sample = '92AV3C.hdr'
 
-    data_file = osp.join(data_path, sample)
+    data_file = os.join(data_path, sample)
     data, info = util.load_ENVI_file(data_file)
 
     plot_linear_stretch(data, result_path, 102, 85, 18, '1')
